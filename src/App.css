@@ -1,0 +1,412 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: sans-serif;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* overflow: hidden; */
+  overflow: initial;
+  font-family: (--font-family);
+}
+
+
+@media screen and (max-width: 600px) {
+  body {
+    background-size: cover;
+    /* :
+      fixed */
+  }
+}
+
+#particles-js {
+  height: 100%
+}
+
+.loginBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  min-height: 200px;
+  /* border-radius: 10px; */
+  padding: 40px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.user {
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 20px
+}
+
+h3 {
+  margin: 0;
+  padding: 0 0 20px;
+  color: #00ffff;
+  text-align: center
+}
+
+h1 {
+  margin: 0;
+  padding: 0 0 20px;
+  color: #000000;
+  text-align: center;
+}
+
+h2 {
+  margin: 0;
+  padding: 0 0 20px;
+  color: #000000;
+  text-align: center;
+}
+
+
+.button {
+  background-color: #000000;
+  border: none;
+  color: rgb(20, 226, 233);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.loginBox input {
+  width: 100%;
+  margin-bottom: 20px
+}
+
+.loginBox input[type="text"],
+.loginBox input[type="email"],
+.loginBox input[type="password"] {
+  border: none;
+  border-bottom: 2px solid #262626;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  background: transparent;
+  font-size: 16px;
+  padding-left: 20px;
+  box-sizing: border-box
+}
+
+.loginBox input[type="text"]:hover,
+.loginBox input[type="email"]:hover,
+.loginBox input[type="password"]:hover {
+  color: #42F3FA;
+  border: 1px solid #42F3FA;
+  box-shadow: 0 0 5px rgba(0, 255, 0, .3), 0 0 10px rgba(0, 255, 0, .2), 0 0 15px rgba(0, 255, 0, .1), 0 2px 0 black
+}
+
+.loginBox input[type="text"]:focus,
+.loginBox input[type="email"]:focus,
+.loginBox input[type="password"]:focus {
+  border-bottom: 2px solid #42F3FA
+}
+
+.inputBox {
+  position: relative
+}
+
+.inputBox span {
+  position: absolute;
+  top: 10px;
+  color: #262626
+}
+
+.loginBox input[type="submit"] {
+  border: none;
+  outline: none;
+  height: 40px;
+  font-size: 16px;
+  background: #59238F;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer
+}
+
+.loginBox a {
+  color: #aeabab;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  display: block
+}
+
+a:hover {
+  color: #cfcfd3;
+}
+
+p {
+  color: #cfcfd3;
+  text-align: center;
+}
+
+.css-d9ml5t-MuiDrawer-docked .MuiDrawer-paper {
+  position: static !important;
+}
+
+.css-ivnu1y-MuiPaper-root-MuiAppBar-root{
+  background-color:#101010 !important;
+}  
+.divlogin{
+text-align: center;
+}
+
+
+.css-1ujykiq-MuiButtonBase-root-MuiTab-root.Mui-selected {
+  color: #101010 !important;
+}
+
+.css-1aquho2-MuiTabs-indicator {
+  background-color: #101010 !important;
+}
+
+.css-sghohy-MuiButtonBase-root-MuiButton-root{
+  background-color: #101010 !important;
+}
+.divhome{
+  position:relative;
+}
+.divpic{
+    max-width: 900px;
+}
+
+
+
+
+
+
+
+
+
+.carousel-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-wrapper {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.carousel-content-wrapper {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.carousel-content {
+  display: flex;
+  transition: all 250ms linear;
+  -ms-overflow-style: none;  /* hide scrollbar in IE and Edge */
+  scrollbar-width: none;  /* hide scrollbar in Firefox */
+}
+
+/* hide scrollbar in webkit browser */
+.carousel-content::-webkit-scrollbar, .carousel-content::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-content > * {
+  width: 100%;
+  flex-shrink: 0;
+  flex-grow: 1;
+}
+
+.left-arrow, .right-arrow {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 24px;
+  background-color: white;
+  border: 1px solid #ddd;
+}
+
+.left-arrow {
+  left: 24px;
+}
+
+.right-arrow {
+  right: 24px;
+}
+
+.carousel-content.show-2 > * {
+  width: 50%;
+}
+
+.carousel-content.show-3 > * {
+  width: calc(100% / 3);
+}
+
+.carousel-content.show-4 > * {
+  width: calc(100% / 4);
+}
+
+element.style {
+  max-width: 1000px !important;
+}
+#growth {
+  
+  overflow-y: scroll;
+ }
+
+ .search {
+  width: 30%;
+}
+
+.css-hip9hq-MuiPaper-root-MuiAppBar-root{
+  background-color: #fff !important;
+  color: #101010 !important;
+  box-shadow:none !important;
+}
+
+.css-11yukd5-MuiTabs-indicator{
+  background-color:#101010 !important;
+}
+
+.p-carousel-indicators{
+  display: none !important;
+}
+
+.p-carousel{
+  text-align: center;
+}
+
+/* .card{
+width:130%;
+text-align: center;
+} */
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus{
+  box-shadow: none;
+}
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  color:#101010;
+}
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link{
+  color:#101010;
+}
+/* img {
+  width:5vh !important;
+
+}
+.imghome{
+  width:100vh;
+} */
+.searchbox{
+  margin-left: 10vh;
+  margin-top: 5vh;
+  height: 5vh;
+}
+.searchpage{
+  margin-top: 10vh;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.component {
+  background-color:inherit;
+  width: 25%;
+  max-width: 600px;
+  margin: 1em auto;
+  padding-bottom: 2em;
+}
+
+.musicCover {
+  border-radius: 10%;
+}
+
+.playButton {
+  background:none;
+  border: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.subTitle {
+  margin-top: -1em;
+  color: #4f4f4f;
+}
+
+.time {
+  margin: 0 auto;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  color: #828282;
+  font-size: smaller;
+}
+
+.timeline {
+  width: 80%;
+  background-color:#fff ;
+}
+
+input[type="range"] {
+  background-color: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .component {
+    width: 50%;
+  }
+}
+.bottom{
+  background-color: #000000d1 !important;
+}
+.time{
+  color: #828282;
+  width: 75vh;
+
+}
+svg{
+  color:#aeabab !important;
+}
+
+.css-a3iisb-MuiPaper-root-MuiAppBar-root {
+  background-color: #9a3ae8 !important;
+}
+
+.video-background {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.centered-text {
+  /* Center the text horizontally and vertically */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/**/
