@@ -6,6 +6,10 @@ import React, {  useEffect } from 'react';
 import DisplayTrack from './DisplayTrack';
 import Controls from './controls';
 import ProgressBar from './ProgressBar';
+import { loadSong } from './SongLoader';
+import songy from "../songs/song.mp3"
+import song2 from "../songs/Lose Control.mp3"
+
 
 
 const AudioPlayer = () => {
@@ -17,7 +21,7 @@ const AudioPlayer = () => {
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
 
-
+ 
   useEffect(() => {
     async function fetchData() {
       try {
@@ -25,10 +29,14 @@ const AudioPlayer = () => {
         const data = response.data;
 
         // Transform the API response into the desired structure
-        const formattedTracks = data.map((song, index) => ({
-          title: song.songName,
-          src: `https://assets.coderrocketfuel.com/pomodoro-times-up.mp3`, // Replace with your actual file path
-          date: song.dateReleased,
+        const formattedTracks = await Promise.all(data.map(async (song, index) => {
+          const songSrc = await loadSong(song.path);
+
+          return {
+            title: song.songName,
+            src: songSrc || '', // Use the dynamically loaded song
+            date: song.dateReleased,
+          };
         }));
 
         setTracks(formattedTracks);

@@ -12,7 +12,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import song from './song.mp3'
 
 //import VideoBackground from '../VideoBackground/background';
 //
@@ -117,14 +116,6 @@ export default function BasicDemo() {
 
     return (
         <>
-        jjjjjjjj
-        <audio src="./song.mp3"></audio>
-        <div>
-      <audio controls>
-        <source src="https://assets.coderrocketfuel.com/pomodoro-times-up.mp3" type="audio/mp3" />
-        Your browser does not support the audio element.
-      </audio>
-    </div>
         <div className="card" >
             <div className='imghome' >
             <Carousel value={songs} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} />
