@@ -35,7 +35,7 @@ console.log(currentTrack.src);
       <div className="audio-info">
         <div className="audio-image">
           {currentTrack ? (
-            <img src={`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_TB1R7WQQj3k8YOcqQ9zKnPYKfQyPMnj2w&usqp=CAU`} alt="audio avatar" />
+            <img src={`https://media.istockphoto.com/id/1287065554/photo/sound-wave.jpg?b=1&s=612x612&w=0&k=20&c=Qbk-qBg1-MueQrxyI1QlNM8SaXsYTv5wS5o46dSqAZU=`} alt="audio avatar" />
           ) : (
             <div className="icon-wrapper">
               <span className="audio-icon">

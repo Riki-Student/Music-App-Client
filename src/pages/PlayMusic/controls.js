@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useContext } from 'react';
 import song from "../songs/song.mp3"
+import { AudioContext } from '../../context/audioContext';
 
 // icons
 import {
@@ -25,10 +27,9 @@ const Controls = ({
   tracks,
   trackIndex,
   setTrackIndex,
-  setCurrentTrack,
   handleNext,
 }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const { currentTrack, isPlaying, setCurrentTrack, setIsPlaying } = useContext(AudioContext);
   const [volume, setVolume] = useState(60);
   const [muteVolume, setMuteVolume] = useState(false);
 

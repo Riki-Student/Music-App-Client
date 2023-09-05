@@ -9,6 +9,7 @@ body {
   /* overflow: hidden; */
   overflow: initial;
   font-family: (--font-family);
+  
 }
 
 
@@ -382,16 +383,19 @@ svg{
 }
 
 .css-a3iisb-MuiPaper-root-MuiAppBar-root {
-  background-color: #9a3ae8 !important;
+  background-color: #ab22bd !important;
 }
 
 .video-background {
   position: relative;
   width: 100%;
-  height: 100vh;
   overflow: hidden;
-}
+  height: 100px;
 
+}
+/* .MuiBox-root css-1svj4mm{
+  max-width: 2000px !important; margin-left: auto; margin-right: auto; margin-top: 0px !important;
+} */
 video {
   position: absolute;
   top: 0;
@@ -410,3 +414,9 @@ video {
   align-items: center;
 }
 /**/
+
+div h4 {
+  padding-left: 15px;
+}
+
+

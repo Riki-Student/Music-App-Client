@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { Modal, Box } from "@mui/material"
 export const AuthContext = createContext();
 
+
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user")) || null)
   const [currentSong, setCurrentSong] = useState(null)

@@ -26,7 +26,8 @@ import NewPlaylist from "./pages/createPlaylists/createPlaylist";
 import AddSongs2Playlist from "./pages/createPlaylists/displaySongs2Playlist";
 import Songs2album from "./pages/library/songs2album";
 import Songs2playlist from "./pages/library/songs2playlist"
-
+import { AudioContextProvider } from "./context/audioContext";
+import Layout from "./Layout";
 
 
 
@@ -40,46 +41,51 @@ function App() {
   return (
     <Router>
       <AuthContextProvider>
+        <AudioContextProvider>
 
-        <Box sx={{
-          flexGrow: 1, display: "flex",
-          minHeight: "100vh", flexFlow: "column"
-        }}>
-          <AppBar position="sticky" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-            <Toolbar>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="start"
-                onClick={handleDrawerToggle}
-                sx={{ mr: 2, display: { sm: 'none' } }}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" noWrap component="div">
-                <MusicNote /> Vibeat <MusicNote />
-              </Typography>
-              <BasicModal></BasicModal>
+          <Box sx={{
+            flexGrow: 1, display: "flex",
+            minHeight: "100vh", flexFlow: "column"
+          }}>
+            <AppBar position="sticky" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+              <Toolbar>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="start"
+                  onClick={handleDrawerToggle}
+                  sx={{ mr: 2, display: { sm: 'none' } }}
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Typography variant="h6" noWrap component="div">
+                  <MusicNote /> Vibeat <MusicNote />
+                </Typography>
+                <BasicModal></BasicModal>
 
-            </Toolbar>
-          </AppBar>
-          <ResponsiveDrawer mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
-          <Box sx={{ ml: "240px", display: "flex", flexGrow: 1 }}>
-            <Routes>
-              {/* <Route path="/login" element={<Login />} /> */}
-              {/* <Route path="/register" element={<Register />} /> */}
-              <Route path="/home" element={<Home id="growth" />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/YourLibrary" element={<Library />} />
-              <Route path="/searchalbums" element={<Searchalbums />} />
-              <Route path="/LikedSongs" element={<FavoriteData />} />
-              <Route path="/createPlaylist" element={<CreatePlaylist />} />
-              <Route path="/createPlaylist/:pId" element={<AddSongs2Playlist />} />
-              <Route path="/albumSongs/:pId" element={< Songs2album />} />
-              <Route path="/playlistSongs/:pId" element={< Songs2playlist />} />
-            </Routes>
+              </Toolbar>
+            </AppBar>
+            <ResponsiveDrawer mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
+            <Box sx={{ ml: "240px", display: "flex", flexGrow: 1 }}>
+              <Layout> {/* Wrap your routes with the Layout component */}
+                <Routes>
+                  {/* <Route path="/login" element={<Login />} /> */}
+                  {/* <Route path="/register" element={<Register />} /> */}
+                  <Route path="/home" element={<Home id="growth" />} />
+                  <Route path="/search" element={<Search />} />
+                  <Route path="/YourLibrary" element={<Library />} />
+                  <Route path="/searchalbums" element={<Searchalbums />} />
+                  <Route path="/LikedSongs" element={<FavoriteData />} />
+                  <Route path="/createPlaylist" element={<CreatePlaylist />} />
+                  <Route path="/createPlaylist/:pId" element={<AddSongs2Playlist />} />
+                  <Route path="/albumSongs/:pId" element={< Songs2album />} />
+                  <Route path="/playlistSongs/:pId" element={< Songs2playlist />} />
+                </Routes>
+              </Layout>
+            </Box>
           </Box>
-        </Box>      </AuthContextProvider>
+        </AudioContextProvider>
+      </AuthContextProvider>
 
     </Router>
 

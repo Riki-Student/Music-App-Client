@@ -14,7 +14,7 @@ code {
 
 .css-1e6y48t-MuiButtonBase-root-MuiButton-root{
 
-  color:#fff !important;
+  color:#000000 !important;
 }
 * {
   box-sizing: border-box;
@@ -27,7 +27,7 @@ body {
 }
 
 .audio-player {
-  background: #686667;
+  background: #747273;
   position: static;
 
 }
@@ -133,7 +133,7 @@ button svg {
 }
 
 .time.current {
-  color: #f50;
+  color: rgb(152, 17, 206);
 }
 
 /* Top bar */
