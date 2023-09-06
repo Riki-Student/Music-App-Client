@@ -52,7 +52,7 @@ console.log(currentTrack);
 
   //   fetchData();
   // }, [currentTrack]);
-
+  
   console.log(tracks);
   console.log(currentTrack);
   // reference

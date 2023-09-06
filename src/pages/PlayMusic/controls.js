@@ -27,9 +27,10 @@ const Controls = ({
   tracks,
   trackIndex,
   setTrackIndex,
+  setCurrentTrack,
   handleNext,
 }) => {
-  const { currentTrack, isPlaying, setCurrentTrack, setIsPlaying } = useContext(AudioContext);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(60);
   const [muteVolume, setMuteVolume] = useState(false);
 

@@ -29,7 +29,7 @@ export const AudioContextProvider = ({ children }) => {
           };
         }));
   console.log(formattedTracks);
-  
+
         setTracks(formattedTracks);
   
         // Only set the current track if it's initially null
