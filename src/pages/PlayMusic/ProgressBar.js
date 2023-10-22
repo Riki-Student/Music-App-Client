@@ -1,9 +1,11 @@
+import { useContext } from 'react';
+import { AudioContext } from '../../context/audioContext';
 const ProgressBar = ({
   progressBarRef,
-  audioRef,
   timeProgress,
   duration,
 }) => {
+  const { audioRef } =  useContext(AudioContext);
   const handleProgressChange = () => {
     audioRef.current.currentTime = progressBarRef.current.value;
   };

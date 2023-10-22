@@ -2,8 +2,11 @@ import * as React from 'react';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
-import AlbumsData from './AlbumsData';
 import Songs2album from './songs2album';
+import  Try  from './Albums';
+import Display from './DisplayLikedAlbums';
+import { Link } from 'react-router-dom';
+
 function Searchalbums(props) {
 
     const [inputText, setInputText] = useState("");
@@ -16,18 +19,22 @@ function Searchalbums(props) {
 
     return (<>
         <React.Fragment>
+          <Display/>
         <div className="search">
         <TextField
           id="outlined-basic"
           onChange={inputHandler}
           variant="outlined"
           fullWidth
-          label="Search"
+          label="Search any Albums"
         />
         
       </div>
-      <AlbumsData input={inputText} />
+      {/* <AlbumsData input={inputText} /> */}
       {/* <Songs2album input={inputText}></Songs2album> */}
+
+      <Try input={inputText}></Try>
+      
         </React.Fragment>
     </>)
 

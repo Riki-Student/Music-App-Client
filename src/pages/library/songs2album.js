@@ -9,6 +9,7 @@ import { InputText } from 'primereact/inputtext';
 import { Rating } from 'primereact/rating';
 
 
+
 function Songs2album() {
 
     const { pId } = useParams()
@@ -33,7 +34,7 @@ function Songs2album() {
         }
         fetchData();
         initFilters();
-    }, []);
+    }, [pId]);
 
     const onGlobalFilterChange = (e) => {
 
@@ -131,6 +132,8 @@ function Songs2album() {
                 />
 
                 <Column
+                    filterField="songName"
+                    field="name"
                     style={{ minWidth: '12rem' }}
                     body={nameBodyTemplate}
                 />

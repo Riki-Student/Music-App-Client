@@ -1,6 +1,5 @@
 
 import Button from '@mui/material/Button';
-import AlbumsData from "./AlbumsData";
 import Searchalbums from "./searchalbums";
 import React, { useState } from "react";
 import BasicDemo from '.';

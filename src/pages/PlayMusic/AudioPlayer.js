@@ -11,6 +11,7 @@ import { loadSong } from './SongLoader';
 import songy from "../songs/song.mp3"
 import song2 from "../songs/Lose Control.mp3"
 import { AudioContext } from '../../context/audioContext';
+import BasicDemo from '../home/carusal2';
 
 
 
@@ -19,10 +20,14 @@ const AudioPlayer = () => {
 
   //const [tracks, setTracks] = useState([]);
   const [trackIndex, setTrackIndex] = useState(0);
-  const { currentTrack, setCurrentTrack, tracks } = useContext(AudioContext);
+  const { currentTrack, setCurrentTrack, tracks} = useContext(AudioContext);
+  const { audioRef } =  useContext(AudioContext);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
+
 console.log(currentTrack);
+
+
 
   // useEffect(() => {
   //   async function fetchData() {
@@ -52,11 +57,11 @@ console.log(currentTrack);
 
   //   fetchData();
   // }, [currentTrack]);
-  
-  console.log(tracks);
-  console.log(currentTrack);
+
+  // console.log(tracks);
+  // console.log(currentTrack);
   // reference
-  const audioRef = useRef();
+  //const audioRef = useRef();
   const progressBarRef = useRef();
 
   if (!tracks || !currentTrack) {
@@ -71,15 +76,16 @@ console.log(currentTrack);
       setCurrentTrack(tracks[trackIndex + 1]);
     }
   };
+  
 
   return (
     <>
+    <div className="wrapper">
       <div className="audio-player">
         <div className="inner">
           <DisplayTrack 
             { ...{
               currentTrack,
-              audioRef,
               setDuration,
               progressBarRef,
               handleNext,
@@ -87,7 +93,6 @@ console.log(currentTrack);
           />
           <Controls
             {...{
-              audioRef,
               progressBarRef,
               duration,
               setTimeProgress,
@@ -99,9 +104,13 @@ console.log(currentTrack);
             }}
           />
           <ProgressBar
-            {...{ progressBarRef, audioRef, timeProgress, duration }}
+            {...{ progressBarRef, timeProgress, duration }}
           />
+          {/* <BasicDemo
+          {...{currentTrack}}
+          ></BasicDemo> */}
         </div>
+      </div>
       </div>
     </>
   );

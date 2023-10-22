@@ -56,17 +56,18 @@ function FavoriteData(props) {
     return (<>
 
         <React.Fragment>
+        {/* <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start' }}> */}
             {favorites.map((song, i) => (
                 <>
                     <Card style={{
-                        display: 'block', minWidth: 100, maxWidth: 300, margin: "20px", width: '100%'
+                        display: 'block', minWidth: 100, maxWidth: 300, margin: "1%", width: '100%'
                     }}
                         sx={{ maxWidth: 250 }} >
                         <CardActionArea key={i}>
                             <CardMedia
                                 component="img"
                                 height="140"
-                                image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2CQDBSm5MNncKaq8SQQEal_Z51qlQ93bvkQ&usqp=CAU"
+                                image="https://media.istockphoto.com/id/1287065554/photo/sound-wave.jpg?b=1&s=612x612&w=0&k=20&c=Qbk-qBg1-MueQrxyI1QlNM8SaXsYTv5wS5o46dSqAZU="
                                 alt="green iguana"
                             />
                             <CardContent key={i}>
@@ -75,16 +76,16 @@ function FavoriteData(props) {
                                 </Typography>
 
                             </CardContent>
-                            <IconButton onClick={() => deleteLikedSong(song.song.songID)}>
+                           
+                        </CardActionArea>
+ <IconButton onClick={() => deleteLikedSong(song.song.songID)}>
                                 <FavoriteOutlinedIcon />
                             </IconButton>
-                        </CardActionArea>
-
                     </Card>
                 </>
 
             ))}
-
+ {/* </div> */}
         </React.Fragment>
     </>)
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Login from "./pages/login/Login";
 import Register from "./pages/login/Register";
@@ -28,11 +28,14 @@ import Songs2album from "./pages/library/songs2album";
 import Songs2playlist from "./pages/library/songs2playlist"
 import { AudioContextProvider } from "./context/audioContext";
 import Layout from "./Layout";
-
+import BasicDemo from "./pages/home/carusal2"
+import { AudioContext } from "./context/audioContext";
 
 
 function App() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const {currentTrack}=useContext(AudioContext)
+
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -41,7 +44,7 @@ function App() {
   return (
     <Router>
       <AuthContextProvider>
-        <AudioContextProvider>
+      <AudioContextProvider>
 
           <Box sx={{
             flexGrow: 1, display: "flex",
@@ -67,11 +70,13 @@ function App() {
             </AppBar>
             <ResponsiveDrawer mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
             <Box sx={{ ml: "240px", display: "flex", flexGrow: 1 }}>
-              <Layout> {/* Wrap your routes with the Layout component */}
+              
+              {/* <Layout> */}
                 <Routes>
+                
                   {/* <Route path="/login" element={<Login />} /> */}
                   {/* <Route path="/register" element={<Register />} /> */}
-                  <Route path="/home" element={<Home id="growth" />} />
+                  <Route path="/home"  element={<><Home id="growth" /></> }/>
                   <Route path="/search" element={<Search />} />
                   <Route path="/YourLibrary" element={<Library />} />
                   <Route path="/searchalbums" element={<Searchalbums />} />
@@ -80,8 +85,10 @@ function App() {
                   <Route path="/createPlaylist/:pId" element={<AddSongs2Playlist />} />
                   <Route path="/albumSongs/:pId" element={< Songs2album />} />
                   <Route path="/playlistSongs/:pId" element={< Songs2playlist />} />
+                  
                 </Routes>
-              </Layout>
+              {/* </Layout> */}
+              
             </Box>
           </Box>
         </AudioContextProvider>

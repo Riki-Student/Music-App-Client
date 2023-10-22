@@ -7,6 +7,7 @@ import { Rating } from 'primereact/rating';
 import IconButton from '@mui/material/IconButton';
 import AddCircleOutline from '@mui/icons-material/AddCircleOutline';
 import AddCircle from '@mui/icons-material/AddCircle';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
 
 import axios from "axios";
@@ -25,6 +26,7 @@ export default function AddSongs2Playlist() {
     const [songs2playlist, setSongs2playlist] = useState([]);
     const [playlists, setPlaylists] = useState([]);
     const { setCurrentSong } = useContext(AuthContext)
+    const [addedSongs, setAddedSongs] = useState({});
 
     const { pId } = useParams()
     const addSongToPlaylist = (songID) => {
@@ -41,8 +43,43 @@ export default function AddSongs2Playlist() {
         }
         Create();
         setSongs2playlist([...songs2playlist, songID]);
+
+        const updatedSongs = [...(addedSongs[pId] || []), songID];
+        setAddedSongs({ ...addedSongs, [pId]: updatedSongs });
+
+        // Save the updated added songs to local storage for the specific playlist
+        const playlistSongsKey = `playlist_${pId}_songs`;
+        localStorage.setItem(playlistSongsKey, JSON.stringify(updatedSongs));
+        // localStorage.setItem('addedSongs', JSON.stringify([...songs2playlist, songID]));
     }
 
+    const removeSongFromPlaylist = (songID) => {
+        console.log("in removeSongFromPlaylist");
+
+        const Delete = async () => {
+            await axios.delete('http://localhost:3600/api/playlists/remove', {
+                data: { "p_playlists_playlistID":pId,"p_songs_songID": songID },
+                headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+            });
+
+        }
+        Delete();
+
+        // Remove the song from the state
+        const updatedSongs1 = songs2playlist.filter(id => id !== songID);
+        setSongs2playlist(updatedSongs1);
+
+        const updatedSongs = (addedSongs[pId] || []).filter(id => id !== songID);
+        setAddedSongs({ ...addedSongs, [pId]: updatedSongs });
+
+        // Save the updated added songs to local storage for the specific playlist
+        const playlistSongsKey = `playlist_${pId}_songs`;
+        localStorage.setItem(playlistSongsKey, JSON.stringify(updatedSongs));
+
+        
+        // Save the updated added songs to local storage
+        // localStorage.setItem('removedSongs', JSON.stringify(updatedSongs));
+    }
 
     useEffect(() => {
 
@@ -71,10 +108,13 @@ export default function AddSongs2Playlist() {
 
         }
         fetchData2();
+        // const addedSongsFromLocalStorage = JSON.parse(localStorage.getItem('addedSongs')) || [];
+        // setSongs2playlist(addedSongsFromLocalStorage);
+        const playlistSongsKey = `playlist_${pId}_songs`;
+        const playlistSongs = JSON.parse(localStorage.getItem(playlistSongsKey)) || [];
+        setAddedSongs({ ...addedSongs, [pId]: playlistSongs });
 
-    }, []);
-
-
+    }, [pId]);
 
 
     const onGlobalFilterChange = (e) => {
@@ -126,18 +166,26 @@ export default function AddSongs2Playlist() {
 
     const nameBodyTemplate = (rowData) => {
         return (
-            <div    onClick={()=>alert("a")} className="flex align-items-center gap-2">
+            <div className="flex align-items-center gap-2">
                 <span>{rowData.songName}</span>
             </div>
         );
     };
 
     const iconBodyTemplate = (rowData) => {
-        const isAdded = songs2playlist.includes(rowData.songID);
+        // const isAdded = songs2playlist.includes(rowData.songID);
+        // const isInPlaylist = playlists.find(playlist => playlist.songID === rowData.songID);
+
+        const isAdded = (addedSongs[pId] || []).includes(rowData.songID);
         const isInPlaylist = playlists.find(playlist => playlist.songID === rowData.songID);
-        const handleClick = () => {
-            setSongs2playlist([...songs2playlist, rowData.songID]);
+
+        const handleAddClick = () => {
             addSongToPlaylist(rowData.songID);
+        };
+
+        const handleRemoveClick = () => {
+            "in handleRemoveClick"
+            removeSongFromPlaylist(rowData.songID);
         };
 
 
@@ -145,15 +193,15 @@ export default function AddSongs2Playlist() {
             <>
                 <React.Fragment>
                     <div className="flex align-items-center gap-2">
-                        {isInPlaylist || isAdded ? (
-                            <IconButton>
-                                <AddCircle />
-                            </IconButton>
-                        ) : (
-                            <IconButton onClick={() => handleClick(rowData)} disabled={isAdded}>
-                                <AddCircleOutline />
-                            </IconButton>
-                        )}
+                    {isInPlaylist || isAdded ? (
+                    <IconButton onClick={handleRemoveClick}>
+                        <RemoveCircleOutlineIcon />
+                    </IconButton>
+                ) : (
+                    <IconButton onClick={handleAddClick} disabled={isAdded}>
+                        <AddCircleOutline />
+                    </IconButton>
+                )}
                     </div>
                 </React.Fragment>
             </>);

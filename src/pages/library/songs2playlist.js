@@ -57,9 +57,9 @@ function Songs2playlist() {
             <div className="flex align-items-center gap-2">
                 <img
                     alt="picture"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2CQDBSm5MNncKaq8SQQEal_Z51qlQ93bvkQ&usqp=CAU"
+                    src="https://media.istockphoto.com/id/1287065554/photo/sound-wave.jpg?b=1&s=612x612&w=0&k=20&c=Qbk-qBg1-MueQrxyI1QlNM8SaXsYTv5wS5o46dSqAZU="
                     //   className={`flag flag-${rowData.country.code}`}
-                    style={{ width: '5px' }}
+                    style={{ width: '50%' }}
                 />
             </div>
         );
@@ -83,20 +83,20 @@ function Songs2playlist() {
                 emptyMessage=""
             >
                 <Column
-                    style={{ minWidth: '12rem' }}
+                    style={{ minWidth: '15rem' }}
                     body={picBodyTemplate}
                 />
 
                 <Column
-                    style={{ minWidth: '12rem' }}
+                    style={{ minWidth: '15rem' }}
                     body={nameBodyTemplate}
                 />
                 <Column
-                    style={{ minWidth: '25rem' }}
+                    style={{ minWidth: '20rem' }}
                     body={timeBodyTemplate}
                 />
                 <Column
-                    style={{ minWidth: '25rem' }}
+                    style={{ minWidth: '20rem' }}
                     body={rateBodyTemplate}
                 />
 

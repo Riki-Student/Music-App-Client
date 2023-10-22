@@ -7,19 +7,17 @@ import "primeicons/primeicons.css";
 import PlaylistsDefault from "./PlaylistsDefault";
 import Albums from "./AlbumsFirst";
 import ArtistsFirst from "./ArtistsFirst";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import Searchalbums from './searchalbums';
 import AlbumsFirst from './AlbumsFirst';
 import axios from "axios";
-import FavoriteAlbums from './FavoriteAlbums';
 import ExistPlaylists from './ExistPlaylists';
 import Searchartists from './searchartists';
 import ArtistsData from './ArtistsData';
 import FavoriteArtists from './FavoriteArtists';
-
-
-
-
+import { AuthContext } from '../../context/authContext';
+import Display from './DisplayLikedAlbums';
+import Try from './Albums';
 
 export default function BasicDemo() {
 
@@ -28,7 +26,8 @@ export default function BasicDemo() {
     const [likedAlbums, setLikedAlbums] = useState([]);
     const [existplaylists, setExistplaylists] = useState([]);
     const [likedArtists,setLikedArtists]=useState([]);
-
+    const { currentLikedAlbums, setCurrentLikedAlbums } = useContext(AuthContext);
+console.log(currentLikedAlbums);
     useEffect(() => {
         const config = {
             headers: {
@@ -52,7 +51,7 @@ export default function BasicDemo() {
         }
         async function fetchData() {
             const { data } = await axios.get(`http://localhost:3600/api/likedalbums`, config);
-            setLikedAlbums(data);
+             setCurrentLikedAlbums(data);
         }
         fetchData();
 
@@ -75,6 +74,7 @@ export default function BasicDemo() {
 
 
     return (
+        
         <div className="card" >
             <TabView>
                 <TabPanel header="Playlists">
@@ -85,7 +85,7 @@ export default function BasicDemo() {
                 </TabPanel>
                 <TabPanel header="Albums">
                     <p className="m-0">
-                        {likedAlbums.length > 0 ? (<FavoriteAlbums></FavoriteAlbums>) :
+                        {currentLikedAlbums.length > 0 ? (<Searchalbums></Searchalbums>): 
                             change ? (<Searchalbums></Searchalbums>) :
                                 (<AlbumsFirst setChange={setChange}></AlbumsFirst>)}
                     </p>

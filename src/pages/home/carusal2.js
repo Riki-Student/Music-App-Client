@@ -12,6 +12,11 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import {Controls} from "../PlayMusic/controls"
+import { PauseCircle } from '@mui/icons-material';
+import { useContext } from 'react';
+import { AudioContext } from '../../context/audioContext';
+
 
 //import VideoBackground from '../VideoBackground/background';
 //
@@ -36,11 +41,13 @@ const cardMediaStyle = {
 
 
 
-export default function BasicDemo() {
+export default function BasicDemo(props) {
     const [songs, setsongs] = useState([]);
     const[change,setChange]=useState(false)
-
-    
+    // const { audioRef,currentTrack ,setCurrentTrack} =  useContext(AudioContext);
+    // const { togglePlayPause } = Controls;
+     console.log(props.currentTrack); 
+   
     const responsiveOptions = [
         {
             breakpoint: '1199px',
@@ -74,13 +81,21 @@ export default function BasicDemo() {
     useEffect(() => {
 
         async function fetchData() {
+            
+console.log("useEffect");
             const { data } = await axios.get(`http://localhost:3600/api/songs`);
             // ((data)=>setsongs(data.slice(0,9)));
             setsongs(data);
         }
         fetchData();
-
+        
+       
     }, []);
+    
+    // const handleClick = () => {
+    //     togglePlayPause();
+    //   };
+    
 
     const productTemplate = (song,i) => {
         return (
@@ -97,6 +112,7 @@ export default function BasicDemo() {
             <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
                 
                 <IconButton aria-label="play/pause">
+                    {/* onClick={handleClick}  */}
                 <PlayArrowIcon sx={{ height: 38, width: 38 }} />
                 </IconButton>
             

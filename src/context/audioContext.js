@@ -1,16 +1,17 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect ,useRef} from 'react';
 import axios from "axios";
 import { loadSong } from '../pages/PlayMusic/SongLoader';
 
 export const AudioContext = createContext({
-  currentTrack: null,
-  setCurrentTrack: () => {},
+  // currentTrack: null,
+  // setCurrentTrack: () => {},
 });
 //change
 export const AudioContextProvider = ({ children }) => {
   const [currentTrack, setCurrentTrack] = useState(null);
   const [tracks, setTracks] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef({ current: new Audio() });
 
   useEffect(() => {
     async function fetchData() {
@@ -25,10 +26,10 @@ export const AudioContextProvider = ({ children }) => {
           return {
             title: song.songName,
             src: songSrc || '',
-            id: index
+            // id: index
           };
         }));
-  console.log(formattedTracks);
+  // console.log(formattedTracks);
 
         setTracks(formattedTracks);
   
@@ -43,11 +44,12 @@ export const AudioContextProvider = ({ children }) => {
   
     fetchData();
   }, []);
-  console.log(currentTrack);
-  console.log(isPlaying);
+  // console.log(currentTrack);
+  // console.log(isPlaying);
+ 
 
   return (
-    <AudioContext.Provider value={{ currentTrack, setCurrentTrack, isPlaying, setIsPlaying, tracks,setTracks }}>
+    <AudioContext.Provider value={{ currentTrack, setCurrentTrack, isPlaying, setIsPlaying, tracks,setTracks,audioRef }}>
       {children}
     </AudioContext.Provider>
   );

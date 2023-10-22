@@ -9,9 +9,13 @@ import B from '../login/pop'
 import Button from '@mui/material/Button';
 import VideoBackground from '../VideoBackground/background';
 import { Margin } from '@mui/icons-material';
+import { useContext } from 'react';
+import { AudioContext } from '../../context/audioContext';
 const drawerWidth = 240;
 
-export default function Home() {
+export default function Home(props) {
+  // const { audioRef,currentTrack ,setCurrentTrack} =  useContext(AudioContext);
+  console.log(props.currentTrack);
   return (<div
     // style={{
     //   maxWidth: 900,
@@ -20,8 +24,8 @@ export default function Home() {
     //   marginTop: 100
     // }}
   >
-<VideoBackground ></VideoBackground>
-<h1>Welcome to Vibeat!!</h1>
+{/* <VideoBackground ></VideoBackground> */}
+<h1>Vibeat</h1>
 <h2>Want to listen to music that matches your current mood?</h2>
 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
 <Button variant="text"><b>! Press Here !</b></Button>
@@ -30,7 +34,7 @@ export default function Home() {
     <h4>New Relieased</h4>
     </div>
     <Divider variant="middle" /><br></br>
-    <BasicDemo></BasicDemo><br></br><br></br>
+    <BasicDemo currentTrack={props.currentTrack} setCurrentSong={props.setCurrentSong}></BasicDemo><br></br><br></br>
     {/* <Carousel show={4}>
         
       <div>

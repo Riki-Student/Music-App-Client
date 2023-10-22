@@ -33,7 +33,7 @@ function CreatePlaylist() {
         }
         fetchData();
 
-    }, []);
+    }, [playlists]);
 
     const display=(playlistID)=>{
         //setOpen(true);

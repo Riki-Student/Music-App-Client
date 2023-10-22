@@ -1,23 +1,20 @@
 import { BsMusicNoteBeamed } from 'react-icons/bs';
-
+import { AudioContext } from '../../context/audioContext';
+import React, { useState, useEffect ,useContext} from 'react';
 const DisplayTrack = ({
   currentTrack,
-  audioRef,
   setDuration,
   progressBarRef,
   handleNext,
 }) => {
+  const { audioRef } =  useContext(AudioContext);
   if (!currentTrack || !currentTrack.src) {
     // Check currentTrack and its src property
     return null; // Return null when currentTrack or currentTrack.src is undefined
   }
-console.log(audioRef);
-console.log(currentTrack.src);
-
+  
   const onLoadedMetadata = () => {
-    console.log("hhheerrrr");
-    console.log(audioRef.current.duration);
-    console.log(audioRef.current.src);
+    
     const seconds = audioRef.current.duration;
     setDuration(seconds);
     progressBarRef.current.max = seconds;

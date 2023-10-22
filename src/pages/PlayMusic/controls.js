@@ -19,22 +19,23 @@ import {
   IoMdVolumeLow,
 } from 'react-icons/io';
 
-const Controls = ({
-  audioRef,
+// export
+ const Controls = ({
   progressBarRef,
   duration,
   setTimeProgress,
   tracks,
   trackIndex,
   setTrackIndex,
-  setCurrentTrack,
   handleNext,
 }) => {
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(60);
   const [muteVolume, setMuteVolume] = useState(false);
+  const { audioRef ,setCurrentTrack} =  useContext(AudioContext);
 
-  const togglePlayPause = () => {
+   const togglePlayPause = () => {
     setIsPlaying((prev) => !prev);
   };
 
@@ -53,12 +54,9 @@ const Controls = ({
   }, [audioRef, duration, progressBarRef, setTimeProgress]);
 
   useEffect(() => {
+
     if (audioRef.current) {
-        console.log(audioRef);
-        console.log(audioRef.current);
-        console.log(audioRef.current.duration);
         if (isPlaying) {
-            console.log("in play");
           audioRef.current.play().catch(error => {
             // Handle any errors that may occur when trying to play
             console.error('Error playing audio:', error);
@@ -140,6 +138,7 @@ const Controls = ({
         />
       </div>
     </div>
+    
   );
 };
 

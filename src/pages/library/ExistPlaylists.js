@@ -25,6 +25,21 @@ export default function ExistPlaylists(props) {
         console.log(playlistID);
         const Delete = async () => {
             try {
+        //              const config = {
+        //     headers: {
+        //         Authorization: 'Bearer ' + localStorage.getItem('token')
+        //     }
+        // };
+
+        // const response = await axios.get(`http://localhost:3600/api/playlists/allSongsInPlaylist`, config);
+        // const songsToDelete = response.data;
+
+        // // Delete the songs from local storage
+        // songsToDelete.forEach((song) => {
+        //     const storedSongs = JSON.parse(localStorage.getItem('songs')) || [];
+        //     const updatedSongs = storedSongs.filter((storedSong) => storedSong.songID !== song.songID);
+        //     localStorage.setItem('songs', JSON.stringify(updatedSongs));
+        // });
                 await axios.delete(`http://localhost:3600/api/playlists/${playlistID}`, {
                     headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
                 });

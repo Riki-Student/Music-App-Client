@@ -31,6 +31,10 @@ body {
   position: static;
 
 }
+/* .wrapper {
+  flex-grow: 1;
+  position:-webkit-sticky;
+} */
 
 .inner {
   max-width: 900px;
