@@ -21,6 +21,7 @@ function Songs2artist() {
 
 
         async function fetchData() {
+            console.log("dfdfdfdfdfdfdfdfdf");
             const config = {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("token")
@@ -28,12 +29,13 @@ function Songs2artist() {
             }
             const { data } = await axios.get(`http://localhost:3600/api/songs/artistSongs/${pId}`, config);
             setSongs(data.slice(0, 12));
+            console.log(data);
             setLoading(false);
 
         }
         fetchData();
         initFilters();
-    }, []);
+    }, [pId]);
 
     const onGlobalFilterChange = (e) => {
 
@@ -131,6 +133,8 @@ function Songs2artist() {
                 />
 
                 <Column
+                    filterField="songName"
+                    field="name"
                     style={{ minWidth: '12rem' }}
                     body={nameBodyTemplate}
                 />

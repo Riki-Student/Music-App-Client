@@ -1,7 +1,7 @@
 import React from "react";
 import Button from '@mui/material/Button';
 
-export default function Artists({setArtistChange}){
+export default function ArtistsFirst({setArtistChange}){
 
     return(
         <div>

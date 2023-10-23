@@ -3,6 +3,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import ArtistsData from './ArtistsData';
+import Artists from './Artists';
+import DisplayA from './DisplayLikedArtists';
 function Searchartists(props) {
 
     const [inputTextA, setInputTextA] = useState("");
@@ -15,6 +17,7 @@ function Searchartists(props) {
 
     return (<>
         <React.Fragment>
+          <DisplayA/>
         <div className="search">
         <TextField
           id="outlined-basic"
@@ -25,7 +28,7 @@ function Searchartists(props) {
         />
         
       </div>
-      <ArtistsData input={inputTextA} />
+      <Artists input={inputTextA} />
       {/* <Songs2album input={inputText}></Songs2album> */}
         </React.Fragment>
     </>)

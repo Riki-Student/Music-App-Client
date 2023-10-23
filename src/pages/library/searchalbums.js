@@ -3,9 +3,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Songs2album from './songs2album';
-import  Try  from './Albums';
+import  Albums  from './Albums';
 import Display from './DisplayLikedAlbums';
-import { Link } from 'react-router-dom';
 
 function Searchalbums(props) {
 
@@ -33,7 +32,7 @@ function Searchalbums(props) {
       {/* <AlbumsData input={inputText} /> */}
       {/* <Songs2album input={inputText}></Songs2album> */}
 
-      <Try input={inputText}></Try>
+      <Albums input={inputText}></Albums>
       
         </React.Fragment>
     </>)

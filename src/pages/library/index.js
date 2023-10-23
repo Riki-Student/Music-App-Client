@@ -25,7 +25,7 @@ export default function BasicDemo() {
     const [artistChange, setArtistChange]=useState(false)
     const [likedAlbums, setLikedAlbums] = useState([]);
     const [existplaylists, setExistplaylists] = useState([]);
-    const [likedArtists,setLikedArtists]=useState([]);
+    const {currentLikedArtists,setCurrentLikedArtists} = useContext(AuthContext);
     const { currentLikedAlbums, setCurrentLikedAlbums } = useContext(AuthContext);
 console.log(currentLikedAlbums);
     useEffect(() => {
@@ -66,7 +66,7 @@ console.log(currentLikedAlbums);
         }
         async function fetchData() {
             const { data } = await axios.get(`http://localhost:3600/api/likedartists`, config);
-            setLikedArtists(data);
+            setCurrentLikedArtists(data);
         }
         fetchData();
 
@@ -92,7 +92,7 @@ console.log(currentLikedAlbums);
                 </TabPanel>
                 <TabPanel header="Artists">
                     <p className="m-0">
-                    {likedArtists.length > 0 ? (<FavoriteArtists></FavoriteArtists>) :
+                    {currentLikedArtists.length > 0 ? (<Searchartists></Searchartists>) :
                             artistChange ? (<Searchartists></Searchartists>) :
                                 (<ArtistsFirst setArtistChange={setArtistChange}></ArtistsFirst>)}
                     </p>
