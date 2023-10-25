@@ -74,6 +74,7 @@ export default function Artists(props){
     })
     const display = (artistID) => {
 
+
         navigate(`/artistSongs/${artistID}`)
     }
 
@@ -86,7 +87,7 @@ export default function Artists(props){
                         display: 'block', minWidth: 100, maxWidth: 300, margin: "20px", width: '100%'
                     }}
                         sx={{ maxWidth: 250 }} >
-                        <CardActionArea onClick={() => { display(artist.ArtistID) }} key={i}>
+                        <CardActionArea onClick={() => { display(artist.artistID) }} key={i}>
                             <CardMedia
                                 component="img"
                                 height="140"

@@ -2,7 +2,6 @@ import * as React from 'react';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
-import ArtistsData from './ArtistsData';
 import Artists from './Artists';
 import DisplayA from './DisplayLikedArtists';
 function Searchartists(props) {

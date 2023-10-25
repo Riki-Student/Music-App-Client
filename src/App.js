@@ -31,6 +31,7 @@ import Layout from "./Layout";
 import BasicDemo from "./pages/home/carusal2"
 import { AudioContext } from "./context/audioContext";
 import Songs2artist from "./pages/library/songs2artist";
+import EmotionDetection from "./pages/emotionDetection";
 
 
 function App() {
@@ -87,7 +88,7 @@ function App() {
                   <Route path="/albumSongs/:pId" element={<Songs2album />} />
                   <Route path="/artistSongs/:pId" element={<Songs2artist />} />
                   <Route path="/playlistSongs/:pId" element={< Songs2playlist />} />
-                  
+                  <Route path="/emotionDetection" element={<EmotionDetection/>}/>
                 </Routes>
               {/* </Layout> */}
               

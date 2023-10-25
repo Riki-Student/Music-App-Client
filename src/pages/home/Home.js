@@ -28,7 +28,7 @@ export default function Home(props) {
 <h1>Vibeat</h1>
 <h2>Want to listen to music that matches your current mood?</h2>
 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-<Button variant="text"><b>! Press Here !</b></Button>
+<Button href={`emotionDetection`} variant="text"><b>😢🥴! Press Here !😉😐</b></Button>
 </div>
 <div>
     <h4>New Relieased</h4>

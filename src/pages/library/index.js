@@ -13,8 +13,6 @@ import AlbumsFirst from './AlbumsFirst';
 import axios from "axios";
 import ExistPlaylists from './ExistPlaylists';
 import Searchartists from './searchartists';
-import ArtistsData from './ArtistsData';
-import FavoriteArtists from './FavoriteArtists';
 import { AuthContext } from '../../context/authContext';
 import Display from './DisplayLikedAlbums';
 import Try from './Albums';
