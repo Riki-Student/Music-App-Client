@@ -107,7 +107,8 @@ const EmotionDetection = () => {
                         </button>
                     )}
                     <h2>Emotion Result:{result}</h2>
-                    {songs.map((song, i) => (
+                    {songs?
+                    songs.map((song, i) => (
                         <>
                             <Card style={{
                                 display: 'block', minWidth: 100, maxWidth: 300, margin: "1%", width: '100%'
@@ -130,7 +131,7 @@ const EmotionDetection = () => {
                             </Card>
                         </>
 
-                    ))}
+                    )):<></>}
                 </div>
             </div>
         </div>

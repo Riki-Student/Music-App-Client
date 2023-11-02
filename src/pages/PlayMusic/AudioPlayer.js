@@ -14,7 +14,6 @@ import { AudioContext } from '../../context/audioContext';
 import BasicDemo from '../home/carusal2';
 
 
-
 const AudioPlayer = () => {
 
 
@@ -24,10 +23,6 @@ const AudioPlayer = () => {
   const { audioRef } =  useContext(AudioContext);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-
-console.log(currentTrack);
-
-
 
   // useEffect(() => {
   //   async function fetchData() {

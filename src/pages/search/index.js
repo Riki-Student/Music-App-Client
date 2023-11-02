@@ -6,11 +6,7 @@ import TextField from "@mui/material/TextField";
 import List from './list';
 import TemplateDemo from './grid';
 
-function Search() {
-
-
-
-
+function Search(props) {
     return (<>
         <React.Fragment>
           <div className='searchbox'>
@@ -25,7 +21,7 @@ function Search() {
         
       </div>
       </div>
-      <TemplateDemo  />
+      <TemplateDemo  currentTrack={props.currentTrack} setCurrentTrack={props.setCurrentTrack} setIsPlaying={props.setIsPlaying} isPlaying={props.isPlaying}/>
         </React.Fragment>
     </>)
 

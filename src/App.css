@@ -9,6 +9,7 @@ body {
   /* overflow: hidden; */
   overflow: initial;
   font-family: (--font-family);
+  /* background-color: #000000; */
   
 }
 
@@ -384,7 +385,7 @@ svg{
 }
 
 .css-a3iisb-MuiPaper-root-MuiAppBar-root {
-  background-color: #ab22bd !important;
+  background-color: #777a7a !important;
 }
 
 .video-background {

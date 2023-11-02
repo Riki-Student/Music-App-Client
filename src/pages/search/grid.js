@@ -7,13 +7,17 @@ import { Rating } from 'primereact/rating';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import IconButton from '@mui/material/IconButton';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import { loadSong } from '../PlayMusic/SongLoader';
+import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
 
 import axios from "axios";
 
-export default function TemplateDemo() {
+export default function TemplateDemo(props) {
     const [songs, setsongs] = useState([]);
     const [filters, setFilters] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [rate, setRate]=useState("")
     const [globalFilterValue, setGlobalFilterValue] = useState('');
     const [likedSongs, setLikedSongs] = useState([]);
     const [favorites, setfavorites] = useState([]);
@@ -30,7 +34,13 @@ export default function TemplateDemo() {
             await axios.post(`http://localhost:3600/api/likedsongs`, { "ls_songs_songID": songID }, config);
 
         }
+        const Rate = async () => {
+            const response=await axios.post(`http://localhost:3600/api/songs`, { "songID": songID }, config);
+            setRate(response.data.finalRating)
+        }
         Create();
+        Rate();
+        
         setLikedSongs([...likedSongs, songID]);
     }
 
@@ -65,7 +75,7 @@ export default function TemplateDemo() {
         }
         fetchData2();
 
-    }, []);
+    }, [rate]);
 
 
     const onGlobalFilterChange = (e) => {
@@ -112,9 +122,6 @@ export default function TemplateDemo() {
             </div>
         );
     };
-
-
-
 
     const iconBodyTemplate = (rowData) => {
         const isLiked = likedSongs.includes(rowData.songID);
@@ -172,7 +179,40 @@ export default function TemplateDemo() {
         );
     };
 
+    const handleClick = async (song) => {
+        console.log("nnnn");
+        const songSrc = await loadSong(song.path);
+        props.setCurrentTrack({
+            "title": song.songName,
+            "src": songSrc
+        })
+        console.log(props.currentTrack);
+        props.setIsPlaying(true)
+        // console.log(props.isPlaying);
+    };
+
+    const handleClickPause = async (song) => {
+        console.log("bbbbb");
+
+        props.setIsPlaying(false)
+        // console.log(props.isPlaying);
+    };
+
     const header = renderHeader();
+
+    const playIconBodyTemplate = (rowData) => {
+
+
+        return (
+            <IconButton aria-label="play/pause">
+                    {/* onClick={handleClick}  */}
+                    {props.isPlaying && rowData.songName===props.currentTrack.title?(
+                    <PauseCircleOutlineIcon onClick={()=>{handleClickPause(rowData)}} sx={{ height: 38, width: 38 }} />):(
+                <PlayCircleOutlineIcon onClick={() => { handleClick(rowData) }} sx={{ height: 38, width: 38 }} />)
+                }
+                </IconButton>
+        );
+    };
 
     return (
         <div className="card">
@@ -186,19 +226,24 @@ export default function TemplateDemo() {
                 emptyMessage="No songs found."
             >
                 <Column
-                    style={{ minWidth: '5rem' }}
+                    style={{ minWidth: '10rem' }}
                     body={picBodyTemplate}
                 />
 
                 <Column
-                    style={{ minWidth: '5rem' }}
+                    style={{ minWidth: '5rem' }} // Adjust the width as needed
+                    body={playIconBodyTemplate}
+                />
+
+                <Column
+                    style={{ minWidth: '10rem' }}
                     body={nameBodyTemplate}
                 />
 
                 <Column
                     filterField="songName"
                     field="name"
-                    style={{ minWidth: '15rem' }}
+                    style={{ minWidth: '10rem' }}
                     body={iconBodyTemplate}
                 />
                 <Column

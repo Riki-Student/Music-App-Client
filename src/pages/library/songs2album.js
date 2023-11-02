@@ -7,10 +7,12 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { Rating } from 'primereact/rating';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import { loadSong } from '../PlayMusic/SongLoader';
+import { IconButton } from '@mui/material';
+import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
 
-
-
-function Songs2album() {
+function Songs2album(props) {
 
     const { pId } = useParams()
     const [songs, setSongs] = useState([]);
@@ -113,7 +115,40 @@ function Songs2album() {
         );
     };
 
+    const handleClick = async (song) => {
+        console.log("nnnn");
+        const songSrc = await loadSong(song.path);
+        props.setCurrentTrack({
+            "title": song.songName,
+            "src": songSrc
+        })
+        console.log(props.currentTrack);
+        props.setIsPlaying(true)
+        // console.log(props.isPlaying);
+    };
+
+    const handleClickPause = async (song) => {
+        console.log("bbbbb");
+
+        props.setIsPlaying(false)
+        // console.log(props.isPlaying);
+    };
+
     const header = renderHeader();
+
+    const playIconBodyTemplate = (rowData) => {
+
+
+        return (
+            <IconButton aria-label="play/pause">
+                    {/* onClick={handleClick}  */}
+                    {props.isPlaying && rowData.songName===props.currentTrack.title?(
+                    <PauseCircleOutlineIcon onClick={()=>{handleClickPause(rowData)}} sx={{ height: 38, width: 38 }} />):(
+                <PlayCircleOutlineIcon onClick={() => { handleClick(rowData) }} sx={{ height: 38, width: 38 }} />)
+                }
+                </IconButton>
+        );
+    };
 
     return (
         <div className="card">
@@ -130,19 +165,23 @@ function Songs2album() {
                     style={{ minWidth: '12rem' }}
                     body={picBodyTemplate}
                 />
+                <Column
+                    style={{ minWidth: '10rem' }} // Adjust the width as needed
+                    body={playIconBodyTemplate}
+                />
 
                 <Column
                     filterField="songName"
                     field="name"
-                    style={{ minWidth: '12rem' }}
+                    style={{ minWidth: '15rem' }}
                     body={nameBodyTemplate}
                 />
                 <Column
-                    style={{ minWidth: '25rem' }}
+                    style={{ minWidth: '15rem' }}
                     body={timeBodyTemplate}
                 />
                 <Column
-                    style={{ minWidth: '25rem' }}
+                    style={{ minWidth: '15rem' }}
                     body={rateBodyTemplate}
                 />
 

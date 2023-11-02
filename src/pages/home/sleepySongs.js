@@ -19,7 +19,6 @@ import { useContext } from 'react';
 import { AudioContext } from '../../context/audioContext';
 import Divider from '@mui/material/Divider';
 import { loadSong } from '../PlayMusic/SongLoader';
-import PopSongs from './popSongs';
 
 //import VideoBackground from '../VideoBackground/background';
 //
@@ -43,12 +42,13 @@ const cardMediaStyle = {
   };
 
 
-export default function BasicDemo(props) {
-    const [newSongs, setNewSongs] = useState([]);
-    const [popSongs, setPopSongs] = useState([]);
-    const [newSongsComponent, setNewSongsComponent]=useState("")
-    const[change,setChange]=useState(false)
 
+export default function SleepySongs(props) {
+console.log("here");
+    const [sleepySongs, setSleepySongs] = useState([]);
+    const [popSongsComponent, setPopSongsComponent]=useState("")
+    
+    
     const responsiveOptions = [
         {
             breakpoint: '1199px',
@@ -80,22 +80,14 @@ export default function BasicDemo(props) {
     
 
     useEffect(() => {
-
-        async function fetchData() {
-
-            const { data } = await axios.get(`http://localhost:3600/api/songs/newSongs`);
-            // ((data)=>setsongs(data.slice(0,9)));
-            setNewSongs(data); 
-        }
+        
         async function fetchData2() {
 
-            const  response = await axios.post(`http://localhost:3600/api/songs/genres`,{genreID:3});
+            const  response = await axios.post(`http://localhost:3600/api/songs/genres`,{genreID:7});
             // ((data)=>setsongs(data.slice(0,9)));
-            setPopSongs(response.data);
-            
+            setSleepySongs(response.data);
         }
-        fetchData();
-        // fetchData2()
+        fetchData2()
        
     }, []);
 
@@ -155,21 +147,17 @@ export default function BasicDemo(props) {
         );
     };
 
+    
+
     return (
         <>
-        <div className="card" >
-            <div className='imghome' >
-            <Carousel value={newSongs} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} />
-        </div>
-        </div>
-        
-        {/* <h4>Pop Songs</h4>
+        <h4>Sleepy Songs</h4>
     <Divider variant="middle" /><br></br>
         <div className="card" >
             <div className='imghome' >
-            <Carousel value={popSongs} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} />
+            <Carousel value={sleepySongs} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} />
         </div>
-        </div> */}
+        </div>
         {/* <div className="home-page">
                 <VideoBackground />
               </div> */}
