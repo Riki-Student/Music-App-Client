@@ -5,9 +5,13 @@ import { AuthContext } from '../../context/authContext';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Rating } from 'primereact/rating';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import { loadSong } from '../PlayMusic/SongLoader';
+import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
+import IconButton from '@mui/material/IconButton';
 
 
-function Songs2playlist() {
+function Songs2playlist(props) {
 
     const { pId } = useParams()
     const [songsOfPlaylist, setSongsOfPlaylist] = useState([]);
@@ -31,10 +35,6 @@ function Songs2playlist() {
     }, []);
 
 
-
-
-
-
     const timeBodyTemplate = (rowData) => {
         return (
             <div className="flex align-items-center gap-2">
@@ -53,11 +53,12 @@ function Songs2playlist() {
     };
 
     const picBodyTemplate = (rowData) => {
+        const url = `${rowData.songs.image}`;
         return (
             <div className="flex align-items-center gap-2">
                 <img
                     alt="picture"
-                    src="https://media.istockphoto.com/id/1287065554/photo/sound-wave.jpg?b=1&s=612x612&w=0&k=20&c=Qbk-qBg1-MueQrxyI1QlNM8SaXsYTv5wS5o46dSqAZU="
+                    src={require(`../images/${url}.jpeg`)}
                     //   className={`flag flag-${rowData.country.code}`}
                     style={{ width: '50%' }}
                 />
@@ -73,7 +74,39 @@ function Songs2playlist() {
         );
     };
 
+    const handleClick = async (song) => {
+        console.log("nnnn");
+        const songSrc = await loadSong(song.path);
+        props.setCurrentTrack({
+            "title": song.songName,
+            "src": songSrc,
+            "Image":song.image
+        })
+        console.log(props.currentTrack);
+        props.setIsPlaying(true)
+        // console.log(props.isPlaying);
+    };
 
+    const handleClickPause = async (song) => {
+        console.log("bbbbb");
+
+        props.setIsPlaying(false)
+        // console.log(props.isPlaying);
+    };
+
+    const playIconBodyTemplate = (rowData) => {
+
+
+        return (
+            <IconButton aria-label="play/pause">
+                    {/* onClick={handleClick}  */}
+                    {props.isPlaying && rowData.songs.songName===props.currentTrack.title?(
+                    <PauseCircleOutlineIcon onClick={()=>{handleClickPause(rowData.songs)}} sx={{ height: 38, width: 38 }} />):(
+                <PlayCircleOutlineIcon onClick={() => { handleClick(rowData.songs) }} sx={{ height: 38, width: 38 }} />)
+                }
+                </IconButton>
+        );
+    };
     return (
         <div className="card">
             <DataTable
@@ -85,6 +118,10 @@ function Songs2playlist() {
                 <Column
                     style={{ minWidth: '15rem' }}
                     body={picBodyTemplate}
+                />
+                <Column
+                    style={{ minWidth: '5rem' }} // Adjust the width as needed
+                    body={playIconBodyTemplate}
                 />
 
                 <Column

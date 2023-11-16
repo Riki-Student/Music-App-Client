@@ -7,9 +7,12 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { Rating } from 'primereact/rating';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import { loadSong } from '../PlayMusic/SongLoader';
+import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
+import IconButton from '@mui/material/IconButton';
 
-
-function Songs2artist() {
+function Songs2artist(props) {
 
     const { pId } = useParams()
     const [songs, setSongs] = useState([]);
@@ -94,13 +97,14 @@ function Songs2artist() {
     };
 
     const picBodyTemplate = (rowData) => {
+        const url = `${rowData.image}`;
         return (
             <div className="flex align-items-center gap-2">
                 <img
                     alt="picture"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2CQDBSm5MNncKaq8SQQEal_Z51qlQ93bvkQ&usqp=CAU"
+                    src={require(`../images/${url}.jpeg`)}
                     //   className={`flag flag-${rowData.country.code}`}
-                    style={{ width: '5px' }}
+                    style={{ width: '50%' }}
                 />
             </div>
         );
@@ -114,7 +118,41 @@ function Songs2artist() {
         );
     };
 
+    const handleClick = async (song) => {
+        console.log("nnnn");
+        const songSrc = await loadSong(song.path);
+        props.setCurrentTrack({
+            "title": song.songName,
+            "src": songSrc,
+            "Image":song.image
+        })
+        console.log(props.currentTrack);
+        props.setIsPlaying(true)
+        // console.log(props.isPlaying);
+    };
+
+    const handleClickPause = async (song) => {
+        console.log("bbbbb");
+
+        props.setIsPlaying(false)
+        // console.log(props.isPlaying);
+    };
+
     const header = renderHeader();
+
+    const playIconBodyTemplate = (rowData) => {
+
+
+        return (
+            <IconButton aria-label="play/pause">
+                    {/* onClick={handleClick}  */}
+                    {props.isPlaying && rowData.songName===props.currentTrack.title?(
+                    <PauseCircleOutlineIcon onClick={()=>{handleClickPause(rowData)}} sx={{ height: 38, width: 38 }} />):(
+                <PlayCircleOutlineIcon onClick={() => { handleClick(rowData) }} sx={{ height: 38, width: 38 }} />)
+                }
+                </IconButton>
+        );
+    };
 
     return (
         <div className="card">
@@ -128,8 +166,12 @@ function Songs2artist() {
                 emptyMessage="No songs found."
             >
                 <Column
-                    style={{ minWidth: '12rem' }}
+                    style={{ minWidth: '10rem' }}
                     body={picBodyTemplate}
+                />
+                <Column
+                    style={{ minWidth: '5rem' }} // Adjust the width as needed
+                    body={playIconBodyTemplate}
                 />
 
                 <Column

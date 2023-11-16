@@ -13,6 +13,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
+import CardActions from '@mui/material/CardActions';
 import {Controls} from "../PlayMusic/controls"
 import { PauseCircle, PhotoSizeSelectLargeTwoTone } from '@mui/icons-material';
 import { useContext } from 'react';
@@ -20,7 +21,7 @@ import { AudioContext } from '../../context/audioContext';
 import Divider from '@mui/material/Divider';
 import { loadSong } from '../PlayMusic/SongLoader';
 import PopSongs from './popSongs';
-
+import { loadImage } from '../PlayMusic/ImageLoader';
 //import VideoBackground from '../VideoBackground/background';
 //
 // import { ProductService } from './service/ProductService';
@@ -51,13 +52,13 @@ export default function BasicDemo(props) {
 
     const responsiveOptions = [
         {
-            breakpoint: '1199px',
-            numVisible: 3,
+            breakpoint: '1370px',
+            numVisible: 4,
             numScroll: 1
         },
         {
             breakpoint: '1096',
-            numVisible: 3,
+            numVisible: 2,
             numScroll: 1
         },
         {
@@ -87,15 +88,9 @@ export default function BasicDemo(props) {
             // ((data)=>setsongs(data.slice(0,9)));
             setNewSongs(data); 
         }
-        async function fetchData2() {
-
-            const  response = await axios.post(`http://localhost:3600/api/songs/genres`,{genreID:3});
-            // ((data)=>setsongs(data.slice(0,9)));
-            setPopSongs(response.data);
-            
-        }
+        
         fetchData();
-        // fetchData2()
+
        
     }, []);
 
@@ -104,7 +99,8 @@ export default function BasicDemo(props) {
         console.log("nnnn");
         const songSrc = await loadSong(song.path);
         props.setCurrentTrack({"title":song.songName,
-        "src":songSrc
+        "src":songSrc,
+        "Image":song.image
     })
     console.log(props.currentTrack);
     
@@ -119,48 +115,46 @@ export default function BasicDemo(props) {
     // console.log(props.isPlaying);
       };
     
-
-    const productTemplate = (song,i) => {
+   
+      const productTemplate = (song, i) => {
+        const url = `${song.image}`;
+      
         return (
-            
-            <Card sx={{ display: 'flex' }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <CardContent sx={{ flex: '1 0 auto' }}>
-                <Typography component="div" variant="h5">
-                {song.songName}
-                </Typography>
-                <Typography variant="subtitle1" color="text.secondary" component="div">
-                {song.duration}
-                </Typography>
-            </CardContent>
-            <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-                
-                <IconButton aria-label="play/pause">
-                    {/* onClick={handleClick}  */}
-                    {props.isPlaying && song.songName===props.currentTrack.title?(
-                    <PauseIcon onClick={()=>{handleClickPause(song)}} key={i} sx={{ height: 38, width: 38 }} />):(
-                <PlayArrowIcon onClick={() => { handleClick(song) }} key={i} sx={{ height: 38, width: 38 }} />)
-                }
-                </IconButton>
-            
-            </Box>
-            </Box>
+          <Card sx={{ display:'flex', flexDirection: 'column', width: '200px'  , borderRadius: '15px' }}>
             <CardMedia
-            component="img"
-            sx={cardMediaStyle}
-            image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSkmCMEhcmF5XwpPozOJWo6kfXRtabwTuXIw&usqp=CAU"
-            alt="Live from space album cover"
+              component="img"
+              sx={{ height: '150px', objectFit: 'cover', borderTopLeftRadius: '15px', borderTopRightRadius: '15px' }}
+              image={require(`../images/${url}.jpeg`)}
+              alt={song.songName}
             />
-            </Card>
+            <CardContent>
+              <Typography variant="h6" component="div">
+                {song.songName}
+              </Typography>
+              <Typography variant="subtitle1" color="text.secondary" component="div">
+                {song.duration}
+              </Typography>
+            </CardContent>
+            <CardActions sx={{ justifyContent: 'center' }}>
+              <IconButton aria-label="play/pause" size="medium">
+                {props.isPlaying && song.songName === props.currentTrack.title ? (
+                  <PauseIcon onClick={() => handleClickPause(song)} key={i} sx={{ height: 30, width: 30, color: '#aeabab' }} />
+                ) : (
+                  <PlayArrowIcon onClick={() => handleClick(song)} key={i} sx={{ height: 30, width: 30, color: '#aeabab' }} />
+                )}
+              </IconButton>
+            </CardActions>
+          </Card>
         );
-    };
+      };
+      
 
     return (
         <>
         <div className="card" >
-            <div className='imghome' >
+            
             <Carousel value={newSongs} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} />
-        </div>
+       
         </div>
         
         {/* <h4>Pop Songs</h4>

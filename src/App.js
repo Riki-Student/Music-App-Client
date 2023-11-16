@@ -82,13 +82,13 @@ function App() {
                   <Route path="/search" element={<Search isPlaying={isPlaying} setIsPlaying={setIsPlaying} currentTrack={currentTrack} setCurrentTrack={setCurrentTrack}/>} />
                   <Route path="/YourLibrary" element={<Library />} />
                   <Route path="/searchalbums" element={<Searchalbums />} />
-                  <Route path="/LikedSongs" element={<FavoriteData />} />
+                  <Route path="/LikedSongs" element={<FavoriteData isPlaying={isPlaying} setIsPlaying={setIsPlaying} currentTrack={currentTrack} setCurrentTrack={setCurrentTrack}/>} />
                   <Route path="/createPlaylist" element={<CreatePlaylist />} />
-                  <Route path="/createPlaylist/:pId" element={<AddSongs2Playlist />} />
+                  <Route path="/createPlaylist/:pId" element={<AddSongs2Playlist isPlaying={isPlaying} setIsPlaying={setIsPlaying} currentTrack={currentTrack} setCurrentTrack={setCurrentTrack}/>} />
                   <Route path="/albumSongs/:pId" element={<Songs2album isPlaying={isPlaying} setIsPlaying={setIsPlaying} currentTrack={currentTrack} setCurrentTrack={setCurrentTrack}/>} />
-                  <Route path="/artistSongs/:pId" element={<Songs2artist />} />
-                  <Route path="/playlistSongs/:pId" element={< Songs2playlist />} />
-                  <Route path="/emotionDetection" element={<EmotionDetection/>}/>
+                  <Route path="/artistSongs/:pId" element={<Songs2artist isPlaying={isPlaying} setIsPlaying={setIsPlaying} currentTrack={currentTrack} setCurrentTrack={setCurrentTrack}/>} />
+                  <Route path="/playlistSongs/:pId" element={< Songs2playlist isPlaying={isPlaying} setIsPlaying={setIsPlaying} currentTrack={currentTrack} setCurrentTrack={setCurrentTrack}/>} />
+                  <Route path="/emotionDetection" element={<EmotionDetection isPlaying={isPlaying} setIsPlaying={setIsPlaying} currentTrack={currentTrack} setCurrentTrack={setCurrentTrack}/>}/>
                 </Routes>
               {/* </Layout> */}
               

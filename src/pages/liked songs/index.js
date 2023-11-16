@@ -11,6 +11,9 @@ import TextField from "@mui/material/TextField";
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import IconButton from '@mui/material/IconButton';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+import { loadSong } from '../PlayMusic/SongLoader';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
 
 
 function FavoriteData(props) {
@@ -41,7 +44,7 @@ function FavoriteData(props) {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("token")
             },
-                
+
         }
         async function fetchData() {
             const { data } = await axios.get(`http://localhost:3600/api/likedsongs`, config);
@@ -51,12 +54,34 @@ function FavoriteData(props) {
         fetchData();
     }, []);
 
+    const handleClick = async (song) => {
+        console.log("nnnn");
+        const songSrc = await loadSong(song.path);
+        props.setCurrentTrack({
+            "title": song.songName,
+            "src": songSrc,
+            "Image": song.image
+        })
+        console.log(props.currentTrack);
+
+        props.setIsPlaying(true)
+        // console.log(props.isPlaying);
+    };
+
+    const handleClickPause = async (song) => {
+        console.log("bbbbb");
+
+        props.setIsPlaying(false)
+        // console.log(props.isPlaying);
+    };
+
 
 
     return (<>
 
         <React.Fragment>
-        {/* <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start' }}> */}
+
+            {/* <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start' }}> */}
             {favorites.map((song, i) => (
                 <>
                     <Card style={{
@@ -67,7 +92,7 @@ function FavoriteData(props) {
                             <CardMedia
                                 component="img"
                                 height="140"
-                                image="https://media.istockphoto.com/id/1287065554/photo/sound-wave.jpg?b=1&s=612x612&w=0&k=20&c=Qbk-qBg1-MueQrxyI1QlNM8SaXsYTv5wS5o46dSqAZU="
+                                image={require(`../images/${song.song.image}.jpeg`)}
                                 alt="green iguana"
                             />
                             <CardContent key={i}>
@@ -76,16 +101,23 @@ function FavoriteData(props) {
                                 </Typography>
 
                             </CardContent>
-                           
+
                         </CardActionArea>
- <IconButton onClick={() => deleteLikedSong(song.song.songID)}>
-                                <FavoriteOutlinedIcon />
-                            </IconButton>
+                        <IconButton onClick={() => deleteLikedSong(song.song.songID)}>
+                            <FavoriteOutlinedIcon />
+                        </IconButton>
+                        <IconButton aria-label="play/pause" size="medium">
+                            {props.isPlaying && song.song.songName === props.currentTrack.title ? (
+                                <PauseIcon onClick={() => handleClickPause(song.song)} key={i} sx={{ height: 30, width: 30, color: '#aeabab' }} />
+                            ) : (
+                                <PlayArrowIcon onClick={() => handleClick(song.song)} key={i} sx={{ height: 30, width: 30, color: '#aeabab' }} />
+                            )}
+                        </IconButton>
                     </Card>
                 </>
 
             ))}
- {/* </div> */}
+            {/* </div> */}
         </React.Fragment>
     </>)
 }

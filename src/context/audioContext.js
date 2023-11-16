@@ -22,14 +22,15 @@ export const AudioContextProvider = ({ children }) => {
         // Transform the API response into the desired structure
         const formattedTracks = await Promise.all(data.map(async (song, index) => {
           const songSrc = await loadSong(song.path);
-  
+
           return {
             title: song.songName,
             src: songSrc || '',
+            Image: `${song.image}`
             // id: index
           };
         }));
-  // console.log(formattedTracks);
+  console.log(formattedTracks);
 
         setTracks(formattedTracks);
   

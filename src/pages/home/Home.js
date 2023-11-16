@@ -33,7 +33,7 @@ export default function Home(props) {
   >
 {/* <VideoBackground ></VideoBackground> */}
 {/* <h1>Vibeat</h1> */}
-<h2>Want to listen to music that matches your current mood?</h2>
+{/* <h2>Want to listen to music that matches your current mood?</h2> */}
 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
 <Button href={`emotionDetection`} variant="text"><b>😢🥴! Press Here !😉😐</b></Button>
 </div>
@@ -41,9 +41,11 @@ export default function Home(props) {
     <h4>New Relieased</h4>
     </div>
     <Divider variant="middle" /><br></br>
-    <BasicDemo currentTrack={props.currentTrack} setCurrentTrack={props.setCurrentTrack} setIsPlaying={props.setIsPlaying} isPlaying={props.isPlaying}></BasicDemo><br></br><br></br>
-    <PopSongs currentTrack={props.currentTrack} setCurrentTrack={props.setCurrentTrack} setIsPlaying={props.setIsPlaying} isPlaying={props.isPlaying}/><br></br><br></br>
+    <BasicDemo currentTrack={props.currentTrack} setCurrentTrack={props.setCurrentTrack} setIsPlaying={props.setIsPlaying} isPlaying={props.isPlaying}></BasicDemo>
+    <PopSongs currentTrack={props.currentTrack} setCurrentTrack={props.setCurrentTrack} setIsPlaying={props.setIsPlaying} isPlaying={props.isPlaying}/>
     <SleepySongs currentTrack={props.currentTrack} setCurrentTrack={props.setCurrentTrack} setIsPlaying={props.setIsPlaying} isPlaying={props.isPlaying}/>
+    <div style={{ width: '100px', height: '100px' }} />
+    
     {/* <Carousel show={4}>
         
       <div>

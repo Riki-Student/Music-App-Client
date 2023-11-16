@@ -9,10 +9,8 @@ body {
   /* overflow: hidden; */
   overflow: initial;
   font-family: (--font-family);
-  /* background-color: #000000; */
-  
+  background-color: #ffffff !important;
 }
-
 
 @media screen and (max-width: 600px) {
   body {
@@ -144,7 +142,7 @@ h2 {
 }
 
 a:hover {
-  color: #cfcfd3;
+  color: #ffffff;
 }
 
 p {
@@ -181,13 +179,6 @@ text-align: center;
 .divpic{
     max-width: 900px;
 }
-
-
-
-
-
-
-
 
 
 .carousel-container {
@@ -244,7 +235,7 @@ text-align: center;
 }
 
 .right-arrow {
-  right: 24px;
+  right: 5px;
 }
 
 .carousel-content.show-2 > * {
@@ -268,7 +259,7 @@ element.style {
  }
 
  .search {
-  width: 30%;
+  width:60%;
 }
 
 .css-hip9hq-MuiPaper-root-MuiAppBar-root{
@@ -360,12 +351,10 @@ text-align: center;
 
 .timeline {
   width: 80%;
-  background-color:#fff ;
+  background-color:rgb(92, 90, 90) ;
 }
 
-input[type="range"] {
-  background-color: #ffffff;
-}
+
 
 @media (max-width: 900px) {
   .component {
@@ -376,7 +365,7 @@ input[type="range"] {
   background-color: #000000d1 !important;
 }
 .time{
-  color: #828282;
+  color: #ccc;
   width: 75vh;
 
 }
@@ -385,7 +374,17 @@ svg{
 }
 
 .css-a3iisb-MuiPaper-root-MuiAppBar-root {
-  background-color: #777a7a !important;
+  background-color: #070707 !important;
+}
+.css-12i7wg6-MuiPaper-root-MuiDrawer-paper{
+  background-color: #070707 !important;
+}
+.css-10hburv-MuiTypography-root{
+  color:#aeabab;
+}
+
+.css-10hburv-MuiTypography-root:hover {
+  color: #ffffff; /* Change to the color you want on hover */
 }
 
 .video-background {
@@ -421,5 +420,9 @@ div h4 {
   padding-left: 15px;
 }
 
-
-
+.css-46bh2p-MuiCardContent-root{
+padding:5px !important;
+}
+.css-10r5to9-MuiCardActions-root{
+  padding:5px !important;
+}

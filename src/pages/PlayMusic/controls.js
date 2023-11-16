@@ -134,7 +134,7 @@ import {
           value={volume}
           onChange={(e) => setVolume(e.target.value)}
           style={{
-            background: `linear-gradient(to right, #f50 ${volume}%, #ccc ${volume}%)`,
+            background: `linear-gradient(to right, rgb(92, 90, 90) ${volume}%, #ccc ${volume}%)`,
           }}
         />
       </div>

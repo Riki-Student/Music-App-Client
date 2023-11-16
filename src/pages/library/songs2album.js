@@ -120,7 +120,8 @@ function Songs2album(props) {
         const songSrc = await loadSong(song.path);
         props.setCurrentTrack({
             "title": song.songName,
-            "src": songSrc
+            "src": songSrc,
+            "Image":song.image
         })
         console.log(props.currentTrack);
         props.setIsPlaying(true)

@@ -159,11 +159,12 @@ export default function TemplateDemo(props) {
     };
 
     const picBodyTemplate = (rowData) => {
+        const url = `${rowData.image}`;
         return (
             <div className="flex align-items-center gap-2">
                 <img
                     alt="picture"
-                    src="https://media.istockphoto.com/id/1287065554/photo/sound-wave.jpg?b=1&s=612x612&w=0&k=20&c=Qbk-qBg1-MueQrxyI1QlNM8SaXsYTv5wS5o46dSqAZU="
+                    src={require(`../images/${url}.jpeg`)}
                     //   className={`flag flag-${rowData.country.code}`}
                     style={{ width: '50%' }}
                 />
@@ -184,7 +185,8 @@ export default function TemplateDemo(props) {
         const songSrc = await loadSong(song.path);
         props.setCurrentTrack({
             "title": song.songName,
-            "src": songSrc
+            "src": songSrc,
+            "Image":song.image
         })
         console.log(props.currentTrack);
         props.setIsPlaying(true)

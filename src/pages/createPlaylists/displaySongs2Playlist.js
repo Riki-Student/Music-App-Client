@@ -17,8 +17,10 @@ import { Button } from '@mui/material';
 import { AuthContext } from '../../context/authContext';
 import { Article,  Audiotrack   ,AudioFile } from '@mui/icons-material';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
+import { loadSong } from '../PlayMusic/SongLoader';
 
-export default function AddSongs2Playlist() {
+export default function AddSongs2Playlist(props) {
     const [songs, setsongs] = useState([]);
     const [filters, setFilters] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -208,13 +210,14 @@ export default function AddSongs2Playlist() {
     };
 
     const picBodyTemplate = (rowData) => {
+        const url = `${rowData.image}`;
         return (
             <div className="flex align-items-center gap-2">
                 <img
                     alt="picture"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2CQDBSm5MNncKaq8SQQEal_Z51qlQ93bvkQ&usqp=CAU"
+                    src={require(`../images/${url}.jpeg`)}
                     //   className={`flag flag-${rowData.country.code}`}
-                    style={{ width: '5px' }}
+                    style={{ width: '50%' }}
                 />
             </div>
         );
@@ -228,19 +231,54 @@ export default function AddSongs2Playlist() {
         );
     };
 
+    const handleClick = async (song) => {
+        console.log("nnnn");
+        const songSrc = await loadSong(song.path);
+        props.setCurrentTrack({
+            "title": song.songName,
+            "src": songSrc,
+            "Image":song.image
+        })
+        console.log(props.currentTrack);
+        props.setIsPlaying(true)
+        // console.log(props.isPlaying);
+    };
+
+    const handleClickPause = async (song) => {
+        console.log("bbbbb");
+
+        props.setIsPlaying(false)
+        // console.log(props.isPlaying);
+    };
+
     const header = renderHeader();
-    const SongBody = (song) => {
+
+    const playIconBodyTemplate = (rowData) => {
+
+
         return (
-            <audio src={`http://localhost:3600/songs/${song.path}`} controls />
-        )
+            <IconButton aria-label="play/pause">
+                    {/* onClick={handleClick}  */}
+                    {props.isPlaying && rowData.songName===props.currentTrack.title?(
+                    <PauseCircleOutlineIcon onClick={()=>{handleClickPause(rowData)}} sx={{ height: 38, width: 38 }} />):(
+                <PlayCircleOutlineIcon onClick={() => { handleClick(rowData) }} sx={{ height: 38, width: 38 }} />)
+                }
+                </IconButton>
+        );
     };
-    const SongButton = (song) => {
-        return (
-            <Button onClick={() => { setCurrentSong(song) }} >
-                <PlayCircleOutlineIcon />
-            </Button>
-        )
-    };
+
+    // const SongBody = (song) => {
+    //     return (
+    //         <audio src={`http://localhost:3600/songs/${song.path}`} controls />
+    //     )
+    // };
+    // const SongButton = (song) => {
+    //     return (
+    //         <Button onClick={() => { setCurrentSong(song) }} >
+    //             <PlayCircleOutlineIcon />
+    //         </Button>
+    //     )
+    // };
     return (
         <div className="card">
 
@@ -261,7 +299,10 @@ export default function AddSongs2Playlist() {
                     body={picBodyTemplate}
                 />
                 {/* <Column header="Song" body={SongBody}></Column> */}
-                <Column body={SongButton}></Column>
+                <Column
+                    style={{ minWidth: '5rem' }} // Adjust the width as needed
+                    body={playIconBodyTemplate}
+                />
 
                 <Column
                  
